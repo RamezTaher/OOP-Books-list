@@ -1,19 +1,24 @@
-const personPrototypes = {
-  greeting: function () {
-    return `hello there ${this.firstName} ${this.lastName}`
-  },
+class Person {
+  constructor(firstName, lastName, dob) {
+    this.firstName = firstName
+    this.lastName = lastName
+  }
+  greeting() {
+    return `Hello there ${this.firstName} ${this.lastName}`
+  }
 }
 
-const ramez = Object.create(personPrototypes)
-ramez.firstName = "Ramez"
-ramez.lastName = "Taher"
-ramez.age = 19
-console.log(ramez.greeting())
+class Customer extends Person {
+  constructor(firstName, lastName, phone, isLogged) {
+    super(firstName, lastName)
+    this.phone = phone
+    this.isLogged = isLogged
+  }
 
-const mohamed = Object.create(personPrototypes, {
-  firstName: { value: "Mohamed" },
-  lastName: { value: "Traversy" },
-  age: { value: 20 },
-})
+  static returnNumber() {
+    return 500
+  }
+}
 
-console.log(mohamed.greeting())
+const john = new Customer("John", "Doe", "5555555", true)
+console.log(Person.returnNumber())
