@@ -1,48 +1,40 @@
-// String
+// Person Constructor
+function Person(firstName, lastName, dob) {
+  this.firstName = firstName
+  this.lastName = lastName
+  this.birthay = new Date(dob)
 
-const name = "Ramez"
-const name1 = new String("Ramez")
-
-// name1.x = "added value"
-
-// console.log(name)
-// console.log(name1)
-
-// Number
-
-const num = 5
-const num1 = new Number(5)
-
-// console.log(num)
-// console.log(typeof num1)
-
-// Boolean
-const bool = true
-const bool1 = new Boolean(true)
-// console.log(typeof bool1)
-
-// Function
-const addTwoNums = function (x, y) {
-  return x + y
+  // this.calAge = function () {
+  //   const diff = Date.now() - this.birthay.getTime()
+  //   const ageDate = new Date(diff)
+  //   return ageDate.getUTCFullYear() - 1970
+  // }
 }
 
-// console.log(addTwoNums(1, 1))
+// Calculate Age
+Person.prototype.calAge = function () {
+  const diff = Date.now() - this.birthay.getTime()
+  const ageDate = new Date(diff)
+  return ageDate.getUTCFullYear() - 1970
+}
 
-const addTwoNums1 = new Function("x", "y", "return x + y")
-// console.log(addTwoNums1(1, 1))
+// Get Full Name
+Person.prototype.getFullName = function () {
+  return `${this.firstName} ${this.lastName}`
+}
 
-// Object
-const ramez = { name: "ramez" }
-const ramez1 = new Object({ name: "ramez" })
+// Get Married
+Person.prototype.getMarried = function (newLastName) {
+  this.lastName = newLastName
+}
 
-// Array
-const arr = [1, 2, 3, 4]
-const arr1 = new Array([1, 2, 3, 4])
+const john = new Person("John", "Doe", "12-20-2002")
+const mary = new Person("Mary", "Smith", "10-30-1960")
 
-// Regular Expressions
+console.log(john)
+console.log(mary.calAge())
+console.log(mary.getFullName())
+mary.getMarried("Richard")
+console.log(mary.getFullName())
 
-const re1 = /\w+/
-const re2 = new RegExp("\\w+")
-
-console.log(re1)
-console.log(re2)
+console.log(john.hasOwnProperty("firstNme"))
