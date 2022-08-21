@@ -2,39 +2,35 @@
 function Person(firstName, lastName, dob) {
   this.firstName = firstName
   this.lastName = lastName
-  this.birthay = new Date(dob)
-
-  // this.calAge = function () {
-  //   const diff = Date.now() - this.birthay.getTime()
-  //   const ageDate = new Date(diff)
-  //   return ageDate.getUTCFullYear() - 1970
-  // }
 }
 
-// Calculate Age
-Person.prototype.calAge = function () {
-  const diff = Date.now() - this.birthay.getTime()
-  const ageDate = new Date(diff)
-  return ageDate.getUTCFullYear() - 1970
+// Greeting
+Person.prototype.greeting = function () {
+  return `Hello there ${this.firstName} ${this.lastName}`
 }
 
-// Get Full Name
-Person.prototype.getFullName = function () {
-  return `${this.firstName} ${this.lastName}`
+const person1 = new Person("Ramez", "Taher")
+
+// console.log(person1.greeting())
+
+// Customer Constructor
+function Customer(firstName, lastName, phone, isLogged) {
+  Person.call(this, firstName, lastName)
+  this.phone = phone
+  this.isLogged = isLogged
 }
 
-// Get Married
-Person.prototype.getMarried = function (newLastName) {
-  this.lastName = newLastName
+// Inherit the Person prototype methods
+Customer.prototype = Object.create(Person.prototype)
+
+// Make customer prototype return Customer
+Customer.prototype.constructor = Customer
+
+const customer1 = new Customer("foulen", "foulen", "5555555", "true")
+console.log(customer1.greeting())
+
+// Customer greeting
+Customer.prototype.greeting = function () {
+  return `Hello there ${this.firstName} ${this.lastName} welcome to our company`
 }
-
-const john = new Person("John", "Doe", "12-20-2002")
-const mary = new Person("Mary", "Smith", "10-30-1960")
-
-console.log(john)
-console.log(mary.calAge())
-console.log(mary.getFullName())
-mary.getMarried("Richard")
-console.log(mary.getFullName())
-
-console.log(john.hasOwnProperty("firstNme"))
+console.log(customer1.greeting())
